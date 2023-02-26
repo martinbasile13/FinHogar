@@ -10,8 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model ingresos {
   id Int @id @default(autoincrement())
-  title String @db.VarChar(255)
-  content String
+  nombre String
+  tipo String
+  procedencia String
+  frecuencia String
+  monto Int 
 }

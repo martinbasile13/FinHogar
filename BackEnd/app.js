@@ -11,40 +11,40 @@ app.get('/', (req, res)=> {
 })
 
 //Crear un registo
-app.post(`/post`, async(req, res)=>{
-    const {title, content} = req.body
-    const result = await prisma.post.create({
+app.post(`/ingreso`, async(req, res)=>{
+    const {nombre, tipo, procedencia, frecuencia, monto} = req.body
+    const ingresos = await prisma.ingresos.create({
         data: {
-            title, content
+            nombre, tipo, procedencia, frecuencia, monto
         }
     })
-    res.json(result)
+    res.json(ingresos)
 })
 
 //Mostrar todos los registos
-app.get(`/posts`, async(req, res)=>{
-    const posts = await prisma.post.findMany()
-    res.json(posts)
+app.get(`/ingresos`, async(req, res)=>{
+    const ingresos = await prisma.ingresos.findMany()
+    res.json(ingresos)
 })
 
 //Actualizar un registro
-app.put(`/post/:id`, async(req, res)=>{
+app.put(`/ingreso/:id`, async(req, res)=>{
     const {id} = req.params
-    const {title, content} = req.body
-    const post = await prisma.post.update({
+    const {nombre, tipo, procedencia, frecuencia, monto} = req.body
+    const ingresos = await prisma.ingresos.update({
         where: {id: Number(id)},
-        data: {title, content}
+        data: {nombre, tipo, procedencia, frecuencia, monto}
     })
-    res.json(post)
+    res.json(ingresos)
 })
 
 //Eliminar un registro
-app.delete(`/post/:id`, async(req, res)=>{
+app.delete(`/ingreso/:id`, async(req, res)=>{
     const {id} = req.params
-    const post = await prisma.post.delete({
+    const ingresos = await prisma.ingresos.delete({
         where: {id: Number(id)}
     })
-    res.json('Eliminado')
+    res.json('Ingreso Eliminado')
 })
 
 app.listen(3000, ()=>
